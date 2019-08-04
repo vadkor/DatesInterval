@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Date Interval</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker3.min.css" id="bsdp-css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" id="awesome-css">
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+	<div class="card" style="margin: 40px">
+	<div class="card-header">Date Interval</div>
+	<div class="card-body">
+	<form action="#" th:action="@{/interval}" th:object="${dates}" method="post">
+	<div class="form-group">
+		<label for="startDate">Start Date</label>
+		<div class="input-group date" data-date-format="dd/mm/yyyy">
+			<input class="form-control" type="text" th:field="*{startDate}" th:errorclass="is-invalid" id="startDate" placeholder="dd/mm/yyyy" />
+			<div class="input-group-addon input-group-append">
+				<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			</div>
+		</div>
+		<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}" class="error"></span>
+	</div>
+	<div class="form-group">
+		<label for="endDate">End Date</label>
+		<div class="input-group date" data-date-format="dd/mm/yyyy">
+			<input class="form-control" type="text" th:field="*{endDate}" th:errorclass="is-invalid" id="endDate" placeholder="dd/mm/yyyy" />
+			<div class="input-group-addon input-group-append">
+				<span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			</div>
+		</div>
+		<span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}" class="error"></span>
+	</div>
+	<div th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="error"></div>
+	<input class="btn btn-primary" type="submit" value="Confirm" />
+	</form>
+	</div>
+	</div>
+	<script>
+		$('.input-group.date').datepicker({
+			format: 'dd/mm/yyyy',
+			weekStart: 1,
+			autoclose: true
+		}); 
+	</script>
+</body>
+</html>
